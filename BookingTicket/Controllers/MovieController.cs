@@ -26,6 +26,7 @@ namespace BookingTicket.Controllers
             return View(model);
         }
 
+        #region Create
         public ActionResult AddMovie()
         {
             return PartialView();
@@ -37,11 +38,33 @@ namespace BookingTicket.Controllers
             MovieService.AddMovie(movie);
             return RedirectToAction("Index", "Movie");
         }
+        #endregion
 
-        public ActionResult EditMovie()
+        #region Update
+        public ActionResult EditMovie(string Id)
         {
-            return PartialView();
+            var model = new MovieViewModel();
+            model.Movie = MovieService.GetMovieById(Id);
+            return PartialView(model);
         }
 
+        [HttpPost]
+        public ActionResult EditMovie(Movie movie)
+        {
+            if(movie != null)
+            {
+                MovieService.EditMovie(movie);
+            }
+            return RedirectToAction("Index", "Movie");
+        }
+        #endregion
+
+        #region Delete
+        public ActionResult DeleteMovie(string Id)
+        {
+            MovieService.DeleteMovie(Id);
+            return RedirectToAction("Index", "Movie");
+        }
+        #endregion
     }
 }

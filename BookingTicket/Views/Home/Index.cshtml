@@ -1,4 +1,5 @@
-﻿
+﻿@model BookingTicket.ViewModels.MovieViewListingModel
+
 @{
     ViewBag.Title = "Index";
 }
@@ -272,17 +273,17 @@ Start doing.'>
                 <!-- Movie variant with time -->
                 <div class="movie movie--test movie--test--dark movie--test--left">
                     <div class="movie__images">
-                        <a href="movie-page-left.html" class="movie-beta__link">
-                            <img alt='' src="http://placehold.it/424x424">
+                        <a href="@Url.Action("Details","Movie", new { Id = Model.Movies[0].MovieId})" class="movie-beta__link">
+                            <img alt='image' src="@Model.Movies[0].ImageUrl">
                         </a>
                     </div>
 
                     <div class="movie__info">
-                        <a href='movie-page-left.html' class="movie__title">Gravity (2013)  </a>
+                        <a href='@Url.Action("Details","Movie", new { Id = Model.Movies[0].MovieId})' class="movie__title">@Model.Movies[0].Title  </a>
 
-                        <p class="movie__time">91 min</p>
+                        <p class="movie__time">@Model.Movies[0].RunTime min</p>
 
-                        <p class="movie__option"><a href="#">Sci-Fi</a> | <a href="#">Thriller</a> | <a href="#">Drama</a></p>
+                        <p class="movie__option"><a href="#">@Model.Movies[0].Genre</a> </p>
 
                     </div>
                 </div>
@@ -290,17 +291,17 @@ Start doing.'>
                 <!-- Movie variant with time -->
                 <div class="movie movie--test movie--test--light movie--test--left">
                     <div class="movie__images">
-                        <a href="movie-page-left.html" class="movie-beta__link">
-                            <img alt='' src="http://placehold.it/424x424">
+                        <a href="@Url.Action("Details","Movie", new { Id = Model.Movies[1].MovieId})" class="movie-beta__link">
+                            <img alt='' src="@Model.Movies[1].ImageUrl">
                         </a>
                     </div>
 
                     <div class="movie__info">
-                        <a href='movie-page-left.html' class="movie__title">The Hobbit: The Desolation of Smaug (2013)  </a>
+                        <a href='@Url.Action("Details","Movie", new { Id = Model.Movies[1].MovieId})' class="movie__title"> @Model.Movies[1].Title </a>
 
-                        <p class="movie__time">169 min</p>
+                        <p class="movie__time">@Model.Movies[1].RunTime min</p>
 
-                        <p class="movie__option"><a href="#">Adventure</a> | <a href="#">Fantasy</a> | <a href="#">Drama</a></p>
+                        <p class="movie__option"><a href="#">@Model.Movies[1].Genre</a></p>
 
                        
                     </div>
@@ -309,17 +310,17 @@ Start doing.'>
                 <!-- Movie variant with time -->
                 <div class="movie movie--test movie--test--light movie--test--right">
                     <div class="movie__images">
-                        <a href="movie-page-left.html" class="movie-beta__link">
-                            <img alt='' src="http://placehold.it/424x424">
+                        <a href="@Url.Action("Details","Movie", new { Id = Model.Movies[2].MovieId})" class="movie-beta__link">
+                            <img alt='' src="@Model.Movies[2].ImageUrl">
                         </a>
                     </div>
 
                     <div class="movie__info">
-                        <a href='movie-page-left.html' class="movie__title">The Hunger Games: Catching Fire (2013)   </a>
+                        <a href='@Url.Action("Details","Movie", new { Id = Model.Movies[2].MovieId})' class="movie__title">@Model.Movies[2].Title   </a>
 
-                        <p class="movie__time">146 min</p>
+                        <p class="movie__time">@Model.Movies[2].RunTime min</p>
 
-                        <p class="movie__option"><a href="#">Action</a> | <a href="#">Adventure</a> | <a href="#">Sci-Fi</a></p>
+                        <p class="movie__option"><a href="#">@Model.Movies[2].Genre</a></p>
 
                        
                     </div>
@@ -328,17 +329,17 @@ Start doing.'>
                 <!-- Movie variant with time -->
                 <div class="movie movie--test movie--test--dark movie--test--right">
                     <div class="movie__images">
-                        <a href="movie-page-left.html" class="movie-beta__link">
-                            <img alt='' src="http://placehold.it/424x424">
+                        <a href="@Url.Action("Details","Movie", new { Id = Model.Movies[3].MovieId})" class="movie-beta__link">
+                            <img alt='' src="@Model.Movies[3].ImageUrl">
                         </a>
                     </div>
 
                     <div class="movie__info">
-                        <a href='movie-page-left.html' class="movie__title">Thor: The Dark World (2013) </a>
+                        <a href='@Url.Action("Details","Movie", new { Id = Model.Movies[3].MovieId})' class="movie__title">@Model.Movies[3].Title </a>
 
-                        <p class="movie__time">112 min</p>
+                        <p class="movie__time">@Model.Movies[3].RunTime min</p>
 
-                        <p class="movie__option"><a href="#">Action</a> | <a href="#">Adventure</a> | <a href="#">Fantasy</a></p>
+                        <p class="movie__option"><a href="#">@Model.Movies[3].Genre</a></p>
 
                       
                     </div>
@@ -347,17 +348,17 @@ Start doing.'>
                 <!-- Movie variant with time -->
                 <div class="movie movie--test movie--test--dark movie--test--left">
                     <div class="movie__images">
-                        <a href="movie-page-left.html" class="movie-beta__link">
-                            <img alt='' src="http://placehold.it/424x424">
+                        <a href="@Url.Action("Details","Movie", new { Id = Model.Movies[4].MovieId})" class="movie-beta__link">
+                            <img alt='' src="@Model.Movies[4].ImageUrl">
                         </a>
                     </div>
 
                     <div class="movie__info">
-                        <a href='movie-page-left.html' class="movie__title">World War Z (2013)  </a>
+                        <a href='@Url.Action("Details","Movie", new { Id = Model.Movies[4].MovieId})' class="movie__title">@Model.Movies[4].Title  </a>
 
-                        <p class="movie__time">116 min</p>
+                        <p class="movie__time">@Model.Movies[4].RunTime min</p>
 
-                        <p class="movie__option"><a href="#">Action</a> | <a href="#">Adventure</a> | <a href="#">Horror</a></p>
+                        <p class="movie__option"><a href="#">@Model.Movies[4].Genre</a></p>
 
                         
                     </div>
@@ -366,56 +367,17 @@ Start doing.'>
                 <!-- Movie variant with time -->
                 <div class="movie movie--test movie--test--light movie--test--left">
                     <div class="movie__images">
-                        <a href="movie-page-left.html" class="movie-beta__link">
-                            <img alt='' src="http://placehold.it/424x424">
+                        <a href="@Url.Action("Details","Movie", new { Id = Model.Movies[5].MovieId})" class="movie-beta__link">
+                            <img alt='' src="@Model.Movies[5].ImageUrl">
                         </a>
                     </div>
 
                     <div class="movie__info">
-                        <a href='movie-page-left.html' class="movie__title">Prisoners (2013) </a>
+                        <a href='@Url.Action("Details","Movie", new { Id = Model.Movies[5].MovieId})' class="movie__title">@Model.Movies[5].Title </a>
 
-                        <p class="movie__time">153 min</p>
+                        <p class="movie__time">@Model.Movies[5].RunTime min</p>
 
-                        <p class="movie__option"><a href="#">Crime</a> | <a href="#">Thriller</a> | <a href="#">Drama</a></p>
-
-                        
-                    </div>
-                </div>
-                <!-- Movie variant with time -->
-                <!-- Movie variant with time -->
-                <div class="movie movie--test movie--test--light movie--test--right">
-                    <div class="movie__images">
-                        <a href="movie-page-left.html" class="movie-beta__link">
-                            <img alt='' src="http://placehold.it/424x424">
-                        </a>
-                    </div>
-
-                    <div class="movie__info">
-                        <a href='movie-page-left.html' class="movie__title">This Is the End (2013)   </a>
-
-                        <p class="movie__time">107 min</p>
-
-                        <p class="movie__option"><a href="#">Comedy</a> | <a href="#">Fantasy</a></p>
-
-                        
-                    </div>
-                </div>
-                <!-- Movie variant with time -->
-                <!-- Movie variant with time -->
-                <div class="movie movie--test movie--test--dark movie--test--right">
-                    <div class="movie__images">
-                        <a href="movie-page-left.html" class="movie-beta__link">
-                            <img alt='' src="http://placehold.it/424x424">
-                        </a>
-                    </div>
-
-                    <div class="movie__info">
-                        <a href='movie-page-left.html' class="movie__title">The Internship (2013)  </a>
-
-                        <p class="movie__time">112 min</p>
-
-                        <p class="movie__option"><a href="#">Comedy</a></p>
-
+                        <p class="movie__option"><a href="#">@Model.Movies[5].Genre</a></p>
                     </div>
                 </div>
                 <!-- Movie variant with time -->

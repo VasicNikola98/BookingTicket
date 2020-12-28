@@ -118,7 +118,7 @@ namespace BookingTicket.Service
             if (session == null)
                 return;
 
-            RowSet movieData = session.Execute("update \"Movie\" set \"Title\" = '" + movie.Title + "', \"RunTime\" = '" + movie.RunTime + "',\"Genre\" = '" + movie.Genre + "',  \"ReleaseDate\" = '" + movie.ReleaseDate + "', \"Description\" = '" + movie.Description + "', \"Starring\" = '" + movie.Starring + "'  where \"MovieId\" = '" + movie.MovieId + "'");
+            RowSet movieData = session.Execute("update \"Movie\" set \"Title\" = '" + movie.Title + "', \"RunTime\" = '" + movie.RunTime + "',\"Genre\" = '" + movie.Genre + "',  \"ReleaseDate\" = '" + movie.ReleaseDate + "', \"Description\" = '" + movie.Description + "', \"Starring\" = '" + movie.Starring + "', \"ImageUrl\" = '" + movie.ImageUrl + "'  where \"MovieId\" = '" + movie.MovieId + "'");
         }
     }
 }

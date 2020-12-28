@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingTicket.Service;
+using BookingTicket.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,9 @@ namespace BookingTicket.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var model = new MovieViewListingModel();
+            model.Movies = MovieService.GetLastMovies(8);
+            return View(model);
         }
 
         public ActionResult About()

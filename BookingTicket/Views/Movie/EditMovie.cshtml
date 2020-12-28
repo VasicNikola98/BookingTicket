@@ -1,36 +1,91 @@
-﻿<div class="container row">
+﻿@model BookingTicket.ViewModels.MovieViewModel
+
+<div class="container row">
     <h2 class="page-heading">Izmeni film</h2>
-    <form class="col-md-8">
+    <form class="col-md-8" id="editMovieForm">
         <div class="form-group" style="margin: 5px;">
-            <input class="form-control" id="Title" name="Title" placeholder="Title" required />
+            <input class="form-control" id="Title" name="Title" placeholder="Title" value="@Model.Movie.Title" required />
         </div>
         <div class="form-group" style="margin: 5px;">
-            <input class="form-control" id="Starring" name="Starring" placeholder="Starring" required />
-        </div>
-
-        <div class="form-group" style="margin: 5px;">
-            <input class="form-control" id="Genre" name="Genre" placeholder="Genre" required />
-        </div>
-        <div class="form-group" style="margin: 5px;">
-            <input type="number" class="form-control" id="RunTime" name="RunTime" placeholder="RunTime" required />
+            <input class="form-control" id="Starring" name="Starring" placeholder="Starring" value="@Model.Movie.Starring" required />
         </div>
 
         <div class="form-group" style="margin: 5px;">
-            <textarea rows="4" class="form-control" id="Description" name="Description" placeholder="Opis filma..."></textarea>
+            <input class="form-control" id="Genre" name="Genre" placeholder="Genre" value="@Model.Movie.Genre" required />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <input type="number" class="form-control" id="RunTime" name="RunTime" placeholder="RunTime" value="@Model.Movie.RunTime" required />
+        </div>
+
+        <div class="form-group" style="margin: 5px;">
+            <input class="form-control" id="Description" name="Description" placeholder="Opis filma..." value="@Model.Movie.Description" />
         </div>
 
         <div class="form-group " style="margin: 5px;">
-            <input type="number" class="form-control" id="ReleaseDate" name="ReleaseDate" placeholder="ReleaseDate" required />
-        </div>
+            <input class="form-control" id="ReleaseDate" name="ReleaseDate" placeholder="ReleaseDate" value="@Model.Movie.ReleaseDate" required />
+        </div> 
         <div class="form-group" style="margin: 5px;">
+            <input type="hidden" id="ImageUrl" name="ImageUrl" value="@Model.Movie.ImageUrl"/>
             <input type="file" accept=".jpg, .png" class="form-control" id="imageUpload" name="Image" autocomplete="off" />
-        </div>
+        </div>-
+        <input type="hidden" value="@Model.Movie.MovieId" id="MovieId" name="MovieId" />
     </form>
     <div class="col-md-4">
-        <img id="productImage" src="~/Content/images/logo-dark.png" />
+        <img id="movieImage" src="@Model.Movie.ImageUrl" />
     </div>
     <div class="form-group" style="margin: 12px;">
         <a id="editMovieBtn" class="btn btn--default">Sačuvaj izmene</a>
     </div>
 </div>
 
+<script>
+    $("#editMovieBtn").click(function () {
+        debugger;
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("EditMovie", "Movie")',
+                data: $("#editMovieForm").serialize()
+            })
+            .done(function (response) {
+                $("#movieActionContainer").html("");
+                     swal("Gotovo", "Film je uspešno izmenjen.", "success").then((value) => {
+                        window.location = '@Url.Action("Index","Movie")';
+                    });
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("FAIL");
+            });
+    });
+
+     $("#imageUpload").change(function () {
+
+        
+    var element = this;
+    var formData = new FormData();
+    var totalFiles = element.files.length;
+
+    for (var i = 0; i < totalFiles; i++) {
+        var file = element.files[i];
+        formData.append("Photo", file);
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '@Url.Action("UploadImage", "Shared")',
+        dataType: 'json',
+        data: formData,
+        contentType: false,
+        processData: false
+    })
+        .done(function (response) {
+            console.log(response);
+            if (response.Success) {
+                $("#movieImage").attr("src", response.ImageUrl);
+                $("#ImageUrl").val(response.ImageUrl);
+            }
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail")
+        });
+});
+</script>
