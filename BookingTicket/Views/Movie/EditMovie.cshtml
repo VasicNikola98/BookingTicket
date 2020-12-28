@@ -1,0 +1,36 @@
+﻿<div class="container row">
+    <h2 class="page-heading">Izmeni film</h2>
+    <form class="col-md-8">
+        <div class="form-group" style="margin: 5px;">
+            <input class="form-control" id="Title" name="Title" placeholder="Title" required />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <input class="form-control" id="Starring" name="Starring" placeholder="Starring" required />
+        </div>
+
+        <div class="form-group" style="margin: 5px;">
+            <input class="form-control" id="Genre" name="Genre" placeholder="Genre" required />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <input type="number" class="form-control" id="RunTime" name="RunTime" placeholder="RunTime" required />
+        </div>
+
+        <div class="form-group" style="margin: 5px;">
+            <textarea rows="4" class="form-control" id="Description" name="Description" placeholder="Opis filma..."></textarea>
+        </div>
+
+        <div class="form-group " style="margin: 5px;">
+            <input type="number" class="form-control" id="ReleaseDate" name="ReleaseDate" placeholder="ReleaseDate" required />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <input type="file" accept=".jpg, .png" class="form-control" id="imageUpload" name="Image" autocomplete="off" />
+        </div>
+    </form>
+    <div class="col-md-4">
+        <img id="productImage" src="~/Content/images/logo-dark.png" />
+    </div>
+    <div class="form-group" style="margin: 12px;">
+        <a id="editMovieBtn" class="btn btn--default">Sačuvaj izmene</a>
+    </div>
+</div>
+

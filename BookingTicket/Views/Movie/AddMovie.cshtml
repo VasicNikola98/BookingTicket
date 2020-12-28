@@ -1,0 +1,87 @@
+﻿<div class="container row">
+    <h2 class="page-heading">Novi film</h2>
+    <form id="addMovieForm" class="col-md-8">
+         <div class="form-group"  style="margin: 5px;">
+             <input class="form-control" id="Title" name="Title" placeholder="Title" required />
+         </div>
+         <div class="form-group"  style="margin: 5px;">
+             <input class="form-control" id="Starring" name="Starring" placeholder="Starring" required />
+         </div>
+         
+         
+         <div class="form-group"  style="margin: 5px;">
+             <input class="form-control" id="Genre" name="Genre" placeholder="Genre" required />
+         </div>
+         <div class="form-group"  style="margin: 5px;">
+             <input type="number" class="form-control" id="RunTime" name="RunTime" placeholder="RunTime" required />
+         </div>
+       
+        <div class="form-group"  style="margin: 5px;">
+            <textarea rows="4" class="form-control" id="Description" name="Description" placeholder="Opis filma..."></textarea>
+        </div>
+    
+        <div class="form-group "  style="margin: 5px;">
+            <input class="form-control" id="ReleaseDate" name="ReleaseDate" placeholder="ReleaseDate" required />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <input type="hidden" name="ImageUrl" id="ImageUrl" />
+            <input type="file" accept=".jpg, .png" class="form-control" id="imageUpload" name="Image" autocomplete="off" />
+        </div>
+    </form>
+    <div class="col-md-4">
+        <img id="movieImage" src="~/Content/images/logo-dark.png"/>
+    </div>
+    <div class="form-group"  style="margin: 12px;">
+        <a id="addNewMovieBtn" class="btn btn--default">Sačuvaj</a>
+    </div>
+</div>
+<script>
+    $("#addNewMovieBtn").click(function (){
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddMovie", "Movie")',
+                data: $("#addMovieForm").serialize()
+            })
+            .done(function (response) {
+                $("#movieActionContainer").html("");
+                     swal("Gotovo", "Film je uspešno dodat.", "success").then((value) => {
+                        window.location = '@Url.Action("Index","Movie")';
+                    });
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("FAIL");
+            });
+    });
+
+     $("#imageUpload").change(function () {
+
+        debugger;
+    var element = this;
+    var formData = new FormData();
+    var totalFiles = element.files.length;
+
+    for (var i = 0; i < totalFiles; i++) {
+        var file = element.files[i];
+        formData.append("Photo", file);
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '@Url.Action("UploadImage", "Shared")',
+        dataType: 'json',
+        data: formData,
+        contentType: false,
+        processData: false
+    })
+        .done(function (response) {
+            console.log(response);
+            if (response.Success) {
+                $("#movieImage").attr("src", response.ImageUrl);
+                $("#ImageUrl").val(response.ImageUrl);
+            }
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail")
+        });
+});
+</script>
