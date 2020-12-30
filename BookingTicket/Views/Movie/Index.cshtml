@@ -209,6 +209,13 @@
         init_MovieList();
     });
 
+
+    function focusAction(controlToFocus) {
+        $("html, body").animate({
+            scrollTop: $("#" + controlToFocus).offset().top - 100
+        }, 1000);
+    }
+
     $("#newMovieBtn").click(function () {
        $.ajax({
                 url: '@Url.Action("AddMovie", "Movie")',
@@ -223,7 +230,6 @@
     });
 
     $(".editMovieBtn").click(function () {
-        debugger;
        $.ajax({
            url: '@Url.Action("EditMovie", "Movie")',
            data: {

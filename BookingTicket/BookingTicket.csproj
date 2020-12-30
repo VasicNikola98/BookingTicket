@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HallController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\HallViewModels.cs" />
     <Compile Include="ViewModels\MovieViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -471,6 +473,9 @@
     <Content Include="Views\Reservation\BookingReservationFinal.cshtml" />
     <Content Include="Views\Movie\AddMovie.cshtml" />
     <Content Include="Views\Movie\EditMovie.cshtml" />
+    <Content Include="Views\Hall\Index.cshtml" />
+    <Content Include="Views\Hall\AddHall.cshtml" />
+    <Content Include="Views\Hall\EditHall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

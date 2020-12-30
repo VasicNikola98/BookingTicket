@@ -36,7 +36,8 @@
     </div>
 </div>
 <script>
-    $("#addNewMovieBtn").click(function (){
+    $("#addNewMovieBtn").click(function () {
+
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("AddMovie", "Movie")',

@@ -113,6 +113,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Hall.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Entities\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

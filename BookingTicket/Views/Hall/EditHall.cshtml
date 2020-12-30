@@ -1,0 +1,39 @@
+﻿@model BookingTicket.ViewModels.HallViewModel
+
+<div class="container row">
+    <h2 class="page-heading">Izmeni salu</h2>
+    <form id="editHallForm" class="col-md-8">
+        <div class="form-group" style="margin: 5px;">
+            <input class="form-control" id="Name" name="Name" placeholder="Name" value="@Model.Hall.Name" required />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <input class="form-control" id="NumberOfSeats" name="NumberOfSeats" placeholder="Number Of Seats" value="@Model.Hall.NumberOfSeats" required />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <input class="form-control" id="Type" name="Type" placeholder="Type" value="@Model.Hall.Type" required />
+        </div>
+        <input type="hidden" id="HallId" name="HallId" value="@Model.Hall.HallId" required/>
+    </form>
+    <div class="form-group" style="margin: 12px;">
+        <a id="editHallBtn" class="btn btn--default">Sačuvaj</a>
+    </div>
+</div>
+
+<script>
+    $("#editHallBtn").click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("EditHall", "Hall")',
+                data: $("#editHallForm").serialize()
+            })
+            .done(function (response) {
+                $("#hallActionContainer").html("");
+                     swal("Gotovo", "Sala je uspešno izmenjena.", "success").then((value) => {
+                        window.location = '@Url.Action("Index","Hall")';
+                    });
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("FAIL");
+            });
+    });
+</script>
