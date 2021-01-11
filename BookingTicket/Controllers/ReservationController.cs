@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingTicket.Service;
+using BookingTicket.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,7 +19,9 @@ namespace BookingTicket.Controllers
 
         public ActionResult BookingStepOne()
         {
-            return PartialView();
+            ReservationViewModel model = new ReservationViewModel();
+            model.Movies = MovieService.GetMovies();
+            return PartialView(model);
         }
 
         public ActionResult BookingStepTwo()

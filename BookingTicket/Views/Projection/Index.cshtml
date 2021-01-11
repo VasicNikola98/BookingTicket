@@ -1,0 +1,58 @@
+﻿@model BookingTicket.ViewModels.ProjectionViewListingModel
+
+@{
+    ViewBag.Title = "Index";
+    string[] times = { "11:00", "13:00", "16:30", "20:00", "23:30" };
+}
+
+<div class="container" style="margin-top: 56px;">
+    <a id="addNewProjectionBtn" class="btn btn-primary">Dodaj projekciju</a>
+    @if (Model.Projections != null)
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Film ID</th>
+                    <th>Sala ID</th>
+                    <th>Vreme</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Projections)
+                {
+                    <tr>
+                        <td><a href="@Url.Action("Details","Movie",new { Id = item.MovieId })">@item.MovieId</a></td>
+                        <td>@item.HallId</td>
+                        <td>@item.Time</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<div class="container">
+    <div id="projectionActionContainer">
+
+    </div>
+</div>
+<script>
+
+    $("#addNewProjectionBtn").click(function () {
+        $.ajax({
+                url: '@Url.Action("AddProjection", "Projection")',
+                })
+            .done(function (response) {
+                console.log(response);
+                    $("#projectionActionContainer").html(response);
+                   focusAction("projectionActionContainer");
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail")
+                });
+    });
+    function focusAction(controlToFocus) {
+        $("html, body").animate({
+            scrollTop: $("#" + controlToFocus).offset().top - 100
+        }, 1000);
+    }
+</script>

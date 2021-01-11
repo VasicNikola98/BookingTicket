@@ -173,6 +173,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Controllers\ProjectionController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
@@ -185,6 +186,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\HallViewModels.cs" />
     <Compile Include="ViewModels\MovieViewModels.cs" />
+    <Compile Include="ViewModels\ProjectionViewModels.cs" />
+    <Compile Include="ViewModels\ReservationViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -476,6 +479,8 @@
     <Content Include="Views\Hall\Index.cshtml" />
     <Content Include="Views\Hall\AddHall.cshtml" />
     <Content Include="Views\Hall\EditHall.cshtml" />
+    <Content Include="Views\Projection\Index.cshtml" />
+    <Content Include="Views\Projection\AddProjection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

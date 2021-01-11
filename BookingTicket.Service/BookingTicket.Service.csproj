@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="HallService.cs" />
     <Compile Include="MovieService.cs" />
+    <Compile Include="ProjectionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
