@@ -22,7 +22,7 @@
             @foreach (var movie in Model.Movies)
             {
                 <!--First Slide-->
-                <div class="swiper-slide" data-film='@movie.Title'>
+                <div class="swiper-slide" data-id="@movie.MovieId" data-film='@movie.Title'>
                     <div class="film-images">
                         <img alt='' src="@movie.ImageUrl">
                     </div>
@@ -57,39 +57,13 @@
             </div>
         </div>
 
-        <h2 class="page-heading">Pick time</h2>
 
-        <div class="time-select time-select--wide">
-            <div class="time-select__group group--first">
-                <div class="col-sm-3">
-                    <p class="time-select__place">Cineplek</p>
-                </div>
-                <ul class="col-sm-6 items-wrap">
-                    <li class="time-select__item" data-time='09:40'>09:40</li>
-                    <li class="time-select__item" data-time='13:45'>13:45</li>
-                    <li class="time-select__item" data-time='15:45'>15:45</li>
-                    <li class="time-select__item" data-time='19:50'>19:50</li>
-                    <li class="time-select__item" data-time='21:50'>21:50</li>
-                </ul>
-            </div>
+        <div id="movie-time">
 
-            <div class="time-select__group">
-                <div class="col-sm-3">
-                    <p class="time-select__place">Vilin konjic</p>
-                </div>
-                <ul class="col-sm-6 items-wrap">
-                    <li class="time-select__item" data-time='10:45'>10:45</li>
-                    <li class="time-select__item" data-time='16:00'>16:00</li>
-                    <li class="time-select__item" data-time='19:00'>19:00</li>
-                    <li class="time-select__item" data-time='21:15'>21:15</li>
-                    <li class="time-select__item" data-time='23:00'>23:00</li>
-                </ul>
-            </div>
         </div>
 
-        <div class="choose-indector choose-indector--time">
-            <strong>Choosen: </strong><span class="choosen-area"></span>
-        </div>
+        @{ Html.RenderAction("BookingStepReserve"); }
+
     </div>
 
 </section>
@@ -98,24 +72,11 @@
 
 <form id='film-and-time' class="booking-form" method='get' action='book2.html'>
     <input type='text' name='choosen-movie' class="choosen-movie">
-
     <input type='text' name='choosen-city' class="choosen-city">
     <input type='text' name='choosen-date' class="choosen-date">
-
     <input type='text' name='choosen-cinema' class="choosen-cinema">
     <input type='text' name='choosen-time' class="choosen-time">
-
-
-    <div class="booking-pagination">
-        <a href="#" class="booking-pagination__prev hide--arrow">
-            <span class="arrow__text arrow--prev"></span>
-            <span class="arrow__info"></span>
-        </a>
-        <a style="cursor:pointer;" id="booking-step-one" class="booking-pagination__next">
-            <span class="arrow__text arrow--next">next step</span>
-            <span class="arrow__info">choose a sit</span>
-        </a>
-    </div>
+    <input type='hidden' name='choosen-movie-id' class="choosen-movie-id">
 
 </form>
 
@@ -139,4 +100,5 @@
                 });
         });
 
+       
 </script>

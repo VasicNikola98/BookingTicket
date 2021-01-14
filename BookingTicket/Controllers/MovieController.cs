@@ -23,9 +23,19 @@ namespace BookingTicket.Controllers
         {
             var model = new MovieViewModel();
             model.Movie = MovieService.GetMovieById(Id);
+            model.Projection = ProjectionService.GetProjectionsByMovieId(Id);
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult GetTimeForMovie(string Id)
+        {
+           
+           MovieTimeViewModel model = new MovieTimeViewModel();
+           model.Projections = ProjectionService.GetProjectionsByMovieId(Id);  
+
+           return PartialView(model);
+        }
         #region Create
         public ActionResult AddMovie()
         {

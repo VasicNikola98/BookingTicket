@@ -1,0 +1,55 @@
+﻿@model  BookingTicket.ViewModels.MovieTimeViewModel
+
+@if (Model.Projections != null && Model.Projections.Count > 0)
+{
+    <h2 class="page-heading">Pick time</h2>
+    <div class="time-select time-select--wide">
+        <div class="time-select__group group--first">
+            <div class="col-sm-3">
+                <p class="time-select__place">Cineplek</p>
+            </div>
+            <ul class="col-sm-6 items-wrap">
+                @foreach (var time in Model.Projections)
+                {
+                    <li class="time-select__item" data-time='@time.Time'>@time.Time</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="choose-indector choose-indector--time">
+        <strong>Choosen: </strong><span class="choosen-area"></span>
+    </div>
+    <script>
+        var movie = $('.choosen-movie'),
+            city = $('.choosen-city'),
+            date = $('.choosen-date'),
+            cinema = $('.choosen-cinema'),
+            time = $('.choosen-time');
+
+       
+        $('.time-select__item').click(function () {
+
+            //visual iteractive for choose
+            $('.time-select__item').removeClass('active');
+            $(this).addClass('active');
+
+            //data element init
+            var chooseTime = $(this).attr('data-time');
+            $('.choose-indector--time').find('.choosen-area').text(chooseTime);
+
+            //data element init
+            var chooseCinema = $(this).parent().parent().find('.time-select__place').text();
+
+            //data element set
+            time.val(chooseTime);
+            cinema.val(chooseCinema);
+        });
+
+        $('.choose-indector--time').click(function (e) {
+
+            e.preventDefault();
+            $(this).toggleClass('hide-content');
+            $('.time-select').slideToggle(400);
+        });
+    </script>
+}

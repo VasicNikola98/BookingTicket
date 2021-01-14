@@ -467,7 +467,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
-    <Content Include="Views\Reservation\BookingStepTwo.cshtml" />
     <Content Include="Views\Reservation\BookingStepOne.cshtml" />
     <Content Include="Views\Reservation\BookingStepReserve.cshtml" />
     <Content Include="Views\Movie\Index.cshtml" />
@@ -481,6 +480,7 @@
     <Content Include="Views\Hall\EditHall.cshtml" />
     <Content Include="Views\Projection\Index.cshtml" />
     <Content Include="Views\Projection\AddProjection.cshtml" />
+    <Content Include="Views\Movie\GetTimeForMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

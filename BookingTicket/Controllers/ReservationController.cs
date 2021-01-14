@@ -1,4 +1,5 @@
-﻿using BookingTicket.Service;
+﻿using BookingTicket.Entities.Entities;
+using BookingTicket.Service;
 using BookingTicket.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,18 +25,26 @@ namespace BookingTicket.Controllers
             return PartialView(model);
         }
 
-        public ActionResult BookingStepTwo()
-        {
-            return PartialView();
-        }
-
         public ActionResult BookingStepReserve()
         {
             return PartialView();
         }
 
-        public ActionResult BookingReservationFinal()
+        [HttpPost]
+        public ActionResult BookingReservationFinal(string chooseMovie, string chooseCity, string chooseDate,string chooseCinema,string chooseTime, string userEmail,string userPhoneNummber,string userTicket,string movieId)
         {
+            Reservation reservation = new Reservation();
+            reservation.MovieTitle = chooseMovie;
+            reservation.City = chooseCity;
+            reservation.Date = chooseDate;
+            reservation.Time = chooseTime;
+            reservation.Email = userEmail;
+            reservation.PhoneNummber = userPhoneNummber;
+            reservation.NummberOfTicket = userTicket;
+            reservation.MovieId = movieId;
+            reservation.Cinema = chooseCinema;
+
+            ReservationService.AddReservation(reservation);
             return PartialView();
         }
     }

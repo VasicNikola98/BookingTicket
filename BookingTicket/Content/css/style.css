@@ -6048,6 +6048,10 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 .contact-info .contact-info__field-tel:after {
   content: "\f095";
 }
+.contact-info .contact-info__field-ticket:after {
+    content: "\f3ff";
+}
+
 .error {
   margin-top: 240px;
   margin-bottom: 140px;

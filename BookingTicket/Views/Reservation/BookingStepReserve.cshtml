@@ -1,36 +1,24 @@
 ﻿  <!-- Main content -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 <section class="container">
-    <div class="order-container">
-        <div class="order">
-            <img class="order__images" alt='' src="~/Content/images/tickets.png">
-            <p class="order__title">Book a ticket <br><span class="order__descript">and have fun movie time</span></p>
-        </div>
-    </div>
-    <div class="order-step-area">
-        <div class="order-step first--step order-step--disable ">1. What &amp; Where &amp; When</div>
-        <div class="order-step second--step order-step--disable">2. Choose a sit</div>
-        <div class="order-step third--step">3. Check out</div>
-    </div>
-
+   
     <div class="col-sm-12">
         <div class="checkout-wrapper">
-            <h2 class="page-heading">price</h2>
-            <ul class="book-result">
-                <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">3</span></li>
-                <li class="book-result__item">One item price: <span class="book-result__count booking-price">$20</span></li>
-                <li class="book-result__item">Reservation fee: <span class="book-result__count">$3</span></li>
-                <li class="book-result__item">Total: <span class="book-result__count booking-cost">$69</span></li>
-            </ul>
 
             <h2 class="page-heading">Contact information</h2>
 
             <form id='contact-info' method='post' novalidate="" class="form contact-info">
                 <div class="contact-info__field contact-info__field-mail">
-                    <input type='email' name='user-mail' placeholder='Your email' class="form__mail">
+                    <input type='email' name='user-mail' placeholder='Your email' class="form__mail user-mail">
                 </div>
                 <div class="contact-info__field contact-info__field-tel">
-                    <input type='tel' name='user-tel' placeholder='Phone number' class="form__mail">
+                    <input type='tel' name='user-tel'  placeholder='Phone number' class="form__mail user-tel">
                 </div>
+                <div class="contact-info__field contact-info__field-ticket">
+
+                    <input type='number' name='user-ticket'  placeholder='Broj karata' class="form__mail user-ticket">
+                </div>
+               
             </form>
 
             <p class="reservation-message">Fill your contact information to recieve your reservation code. Reserved tickets are removed 20 minutes befor the session is due to start</p>
@@ -48,18 +36,6 @@
 
 <div class="clearfix"></div>
 
-<div class="booking-pagination">
-    <a style="cursor: pointer;" id="booking-pagination__prev" class="booking-pagination__prev">
-        <p class="arrow__text arrow--prev">prev step</p>
-        <span class="arrow__info">choose a sit</span>
-    </a>
-    <a style="cursor:pointer" class="booking-pagination__next hide--arrow">
-        <p class="arrow__text arrow--next">next step</p>
-        <span class="arrow__info"></span>
-    </a>
-</div>
-
-<div class="clearfix"></div>
 <script>
       $("#booking-pagination__prev").click(function () {
             $.ajax({
@@ -75,8 +51,31 @@
       });
 
     $("#reserveBtn").click(function () {
-            $.ajax({
-                url: '@Url.Action("BookingReservationFinal", "Reservation")',
+        var chooseMovie = $('.choosen-movie').val();
+        var chooseCity = $('.choosen-city').val();
+        var chooseDate = $('.choosen-date').val();
+        var chooseCinema = $('.choosen-cinema').val();
+        var chooseTime = $('.choosen-time').val();
+        var userEmail = $('.user-mail').val();
+        var userPhoneNummber = $('.user-tel').val();
+        var userTicket = $('.user-ticket').val();
+        var movieId = $('.choosen-movie-id').val();
+       
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("BookingReservationFinal", "Reservation")',
+            data: {
+                chooseMovie: chooseMovie,
+                chooseCity: chooseCity,
+                chooseDate: chooseDate,
+                chooseCinema: chooseCinema,
+                chooseTime: chooseTime,
+                userEmail: userEmail,
+                userPhoneNummber: userPhoneNummber,
+                userTicket: userTicket,
+                movieId: movieId
+              
+            }
             })
                 .done(function (response) {
                     $("#bookingStepActionContainer").html(response);

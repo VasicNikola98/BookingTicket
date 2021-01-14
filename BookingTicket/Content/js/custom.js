@@ -502,31 +502,33 @@ function init_BookingOne() {
                      $(this).addClass('film--choosed');
 
                      //data element init
-                     var chooseFilm = $(this).parent().attr('data-film');
-                     $('.choose-indector--film').find('.choosen-area').text(chooseFilm);
-
+                    var chooseFilm = $(this).parent().attr('data-film');
+                    var mId = $(this).parent().attr('data-id');
+                   
+                    var url = 'https://localhost:44382/Movie/GetTimeForMovie/';
+                    
+                    $('.choose-indector--film').find('.choosen-area').text(chooseFilm);
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: {
+                            Id: $(this).parent().attr('data-id')
+                        }
+                    })
+                        .done(function (response) {
+                            $("#movie-time").html(response);
+                            $(".choosen-movie-id").val(mId);
+                        })
+                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert("FAIL");
+                        });
                      //data element set
                      movie.val(chooseFilm);
 
                 })
 
                 //choose time
-                $('.time-select__item').click(function (){
-                	//visual iteractive for choose
-                    $('.time-select__item').removeClass('active');
-                    $(this).addClass('active');
 
-                    //data element init
-                    var chooseTime = $(this).attr('data-time');
-                     $('.choose-indector--time').find('.choosen-area').text(chooseTime);
-
-                    //data element init
-                    var chooseCinema = $(this).parent().parent().find('.time-select__place').text(); 
-
-                    //data element set
-                    time.val(chooseTime);
-                    cinema.val(chooseCinema);
-                });
 
                 // choose (change) city and date for film
 
@@ -561,16 +563,11 @@ function init_BookingOne() {
 
     //7. Visibility block on page control
     			//control block display on page
-                $('.choose-indector--film').click(function (e) {
+    $('.choose-indector--film').click(function (e) {
+      
                     e.preventDefault();
                     $(this).toggleClass('hide-content');
                     $('.choose-film').slideToggle(400);
-                })
-
-                $('.choose-indector--time').click(function (e) {
-                    e.preventDefault();
-                    $(this).toggleClass('hide-content');
-                    $('.time-select').slideToggle(400);
                 })
 }
 

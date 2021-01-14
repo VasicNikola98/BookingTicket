@@ -14,5 +14,12 @@ namespace BookingTicket.ViewModels
     public class MovieViewModel
     {
         public Movie Movie { get; set; }
+        public List<Projection> Projection { get; set; }
     }
+
+    public class MovieTimeViewModel
+    {
+        public List<Projection> Projections { get; set; }
+    }
+
 }
