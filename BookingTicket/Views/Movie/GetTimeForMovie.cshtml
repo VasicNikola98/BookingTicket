@@ -2,7 +2,7 @@
 
 @if (Model.Projections != null && Model.Projections.Count > 0)
 {
-    <h2 class="page-heading">Pick time</h2>
+    <h2 class="page-heading">Izaberi vreme</h2>
     <div class="time-select time-select--wide">
         <div class="time-select__group group--first">
             <div class="col-sm-3">
@@ -17,8 +17,9 @@
         </div>
     </div>
     <div class="choose-indector choose-indector--time">
-        <strong>Choosen: </strong><span class="choosen-area"></span>
+        <strong>Izabrano: </strong><span class="choosen-area"></span>
     </div>
+
     <script>
         var movie = $('.choosen-movie'),
             city = $('.choosen-city'),
@@ -52,4 +53,10 @@
             $('.time-select').slideToggle(400);
         });
     </script>
+}
+else
+{
+    <div class="alert alert-warning">
+        <h2>Još uvek nema ni jedna projekcija za ovaj film!</h2>
+    </div>
 }

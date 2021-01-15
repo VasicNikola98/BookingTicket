@@ -481,6 +481,7 @@
     <Content Include="Views\Projection\Index.cshtml" />
     <Content Include="Views\Projection\AddProjection.cshtml" />
     <Content Include="Views\Movie\GetTimeForMovie.cshtml" />
+    <Content Include="Views\Reservation\AdminIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

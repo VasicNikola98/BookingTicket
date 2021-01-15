@@ -10,4 +10,15 @@ namespace BookingTicket.ViewModels
     {
         public List<Movie> Movies { get; set; }
     }
+
+    public class ReservationFinalViewModel
+    {
+        public Reservation Reservation { get; set; }
+    }
+
+    public class ReservationAdminViewModel
+    {
+        public List<Reservation> Reservations { get; set; }
+    }
+
 }

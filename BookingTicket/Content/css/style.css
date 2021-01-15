@@ -10020,3 +10020,9 @@ ul#navigation li.mega-menu__nav-item:hover:before {
     cursor: pointer;
     color: red;
 }
+
+.deleteProjectionBtn {
+    font-size: 30px;
+    cursor: pointer;
+    color: red;
+}

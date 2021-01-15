@@ -24,5 +24,35 @@ namespace BookingTicket.Service
 
 
         }
+
+        public static List<Reservation> GetReservations()
+        {
+            ISession session = SessionManager.GetSession();
+            List<Reservation> reservations = new List<Reservation>();
+
+
+            if (session == null)
+                return null;
+
+            var reservationsData = session.Execute("select * from \"Reservation\"");
+
+
+            foreach (var reservationData in reservationsData)
+            {
+                Reservation reservation = new Reservation();
+                reservation.ReservationId = reservationData["ReservationId"] != null ? reservationData["ReservationId"].ToString() : string.Empty;
+                reservation.MovieId = reservationData["MovieId"] != null ? reservationData["MovieId"].ToString() : string.Empty;
+                reservation.City = reservationData["City"] != null ? reservationData["City"].ToString() : string.Empty;
+                reservation.Date = reservationData["Date"] != null ? reservationData["Date"].ToString() : string.Empty;
+                reservation.MovieTitle = reservationData["MovieTitle"] != null ? reservationData["MovieTitle"].ToString() : string.Empty;
+                reservation.Time = reservationData["Time"] != null ? reservationData["Time"].ToString() : string.Empty;
+                reservation.Email = reservationData["Email"] != null ? reservationData["Email"].ToString() : string.Empty;
+                reservation.PhoneNummber = reservationData["PhoneNummber"] != null ? reservationData["PhoneNummber"].ToString() : string.Empty;
+                reservation.NummberOfTicket = reservationData["NummberOfTicket"] != null ? reservationData["NummberOfTicket"].ToString() : string.Empty;
+                reservation.Cinema = reservationData["Cinema"] != null ? reservationData["Cinema"].ToString() : string.Empty;
+                reservations.Add(reservation);
+            }
+            return reservations;
+        }
     }
 }

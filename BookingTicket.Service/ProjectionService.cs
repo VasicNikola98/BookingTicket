@@ -69,7 +69,15 @@ namespace BookingTicket.Service
             RowSet projectionData = session.Execute("insert into \"Projection\" (\"ProjectionId\",\"MovieId\", \"HallId\", \"Time\")  values ('" + projection.ProjectionId + "', '" + projection.MovieId + "', '" + projection.HallId + "', '" + projection.Time + "')");
 
         }
+        public static void DeleteProjection(string projectionId)
+        {
+            ISession session = SessionManager.GetSession();
 
+            if (session == null)
+                return;
+
+            RowSet projectionData = session.Execute("delete from \"Projection\" where \"ProjectionId\" = '" + projectionId + "'");
+        }
     }
   
 }

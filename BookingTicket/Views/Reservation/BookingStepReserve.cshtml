@@ -5,28 +5,28 @@
     <div class="col-sm-12">
         <div class="checkout-wrapper">
 
-            <h2 class="page-heading">Contact information</h2>
+            <h2 class="page-heading">Kontakt informacije</h2>
 
-            <form id='contact-info' method='post' novalidate="" class="form contact-info">
+            <form id='contact_info' method='post' novalidate="" class="form contact-info">
                 <div class="contact-info__field contact-info__field-mail">
-                    <input type='email' name='user-mail' placeholder='Your email' class="form__mail user-mail">
+                    <input type='email' id="user_mail" name='user-mail' placeholder='Tvoj email' class="form__mail user-mail" required>
                 </div>
                 <div class="contact-info__field contact-info__field-tel">
-                    <input type='tel' name='user-tel'  placeholder='Phone number' class="form__mail user-tel">
+                    <input type='tel' id="user_tel" name='user-tel'  placeholder='Broj telefona' class="form__mail user-tel" required>
                 </div>
                 <div class="contact-info__field contact-info__field-ticket">
 
-                    <input type='number' name='user-ticket'  placeholder='Broj karata' class="form__mail user-ticket">
+                    <input type='number' id="user_ticket" name='user-ticket'  placeholder='Broj karata' class="form__mail user-ticket" required>
                 </div>
                
             </form>
 
-            <p class="reservation-message">Fill your contact information to recieve your reservation code. Reserved tickets are removed 20 minutes befor the session is due to start</p>
+            <p class="reservation-message">Unesite svoje kontakt podatke kako biste rezervisali karte za izabrani film. Rezervisane karte se uklanjaju 20 minuta pre početka sesije.</p>
 
         </div>
 
         <div class="order">
-            <a style="cursor: pointer;" id="reserveBtn" class="btn btn-md btn--warning btn--wide">reserve</a>
+            <a style="cursor: pointer;" id="reserveBtn" class="btn btn-md btn--warning btn--wide">Rezerviši</a>
         </div>
 
     </div>
@@ -37,18 +37,31 @@
 <div class="clearfix"></div>
 
 <script>
-      $("#booking-pagination__prev").click(function () {
-            $.ajax({
-                url: '@Url.Action("BookingStepTwo", "Reservation")',
-            })
-                .done(function (response) {
-                    $("#bookingStepActionContainer").html(response);
-                    focusAction("bookingStepActionContainer")
-                })
-                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Fail")
-                });
-      });
+
+    $('#contact_info').validate({
+        rules: {
+            user_mail: {
+                required: true
+            },
+            user_tel: {
+                required: true
+            },
+            user_ticket: {
+                required: true
+            }
+        },
+        messages: {
+            user_mail: {
+                required: 'Ovo polje je obavezno!'
+            },
+            user_tel: {
+                required: 'Ovo polje je obavezno!'
+            },
+            user_ticket: {
+                required: 'Ovo polje je obavezno!'
+            }
+        }
+    });
 
     $("#reserveBtn").click(function () {
         var chooseMovie = $('.choosen-movie').val();
@@ -60,22 +73,23 @@
         var userPhoneNummber = $('.user-tel').val();
         var userTicket = $('.user-ticket').val();
         var movieId = $('.choosen-movie-id').val();
-       
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("BookingReservationFinal", "Reservation")',
-            data: {
-                chooseMovie: chooseMovie,
-                chooseCity: chooseCity,
-                chooseDate: chooseDate,
-                chooseCinema: chooseCinema,
-                chooseTime: chooseTime,
-                userEmail: userEmail,
-                userPhoneNummber: userPhoneNummber,
-                userTicket: userTicket,
-                movieId: movieId
-              
-            }
+
+        if ($("#contact_info").valid()) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("BookingReservationFinal", "Reservation")',
+                data: {
+                    chooseMovie: chooseMovie,
+                    chooseCity: chooseCity,
+                    chooseDate: chooseDate,
+                    chooseCinema: chooseCinema,
+                    chooseTime: chooseTime,
+                    userEmail: userEmail,
+                    userPhoneNummber: userPhoneNummber,
+                    userTicket: userTicket,
+                    movieId: movieId
+
+                }
             })
                 .done(function (response) {
                     $("#bookingStepActionContainer").html(response);
@@ -84,5 +98,13 @@
                 .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                     alert("Fail")
                 });
+        } else {
+            swal({
+                title: "Upozorenje!",
+                text: "Popunite sva polja koja su označena zvezdicom!",
+                icon: "warning",
+                dangerMode: true,
+            });
+        }
       });
 </script>

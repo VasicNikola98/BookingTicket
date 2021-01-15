@@ -17,6 +17,13 @@ namespace BookingTicket.Controllers
             return View();
         }
 
+        public ActionResult AdminIndex()
+        {
+            var model = new ReservationAdminViewModel();
+            model.Reservations = ReservationService.GetReservations();
+
+            return View(model);
+        }
 
         public ActionResult BookingStepOne()
         {
@@ -29,8 +36,7 @@ namespace BookingTicket.Controllers
         {
             return PartialView();
         }
-
-        [HttpPost]
+  
         public ActionResult BookingReservationFinal(string chooseMovie, string chooseCity, string chooseDate,string chooseCinema,string chooseTime, string userEmail,string userPhoneNummber,string userTicket,string movieId)
         {
             Reservation reservation = new Reservation();
@@ -45,7 +51,11 @@ namespace BookingTicket.Controllers
             reservation.Cinema = chooseCinema;
 
             ReservationService.AddReservation(reservation);
-            return PartialView();
+
+            var model = new ReservationFinalViewModel();
+            model.Reservation = reservation;
+
+            return PartialView(model);
         }
     }
 }

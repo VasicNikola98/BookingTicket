@@ -36,6 +36,7 @@ namespace BookingTicket.Controllers
 
            return PartialView(model);
         }
+
         #region Create
         public ActionResult AddMovie()
         {

@@ -42,5 +42,16 @@ namespace BookingTicket.Controllers
             }
             return result;
         }
+
+        public JsonResult DeleteProjection(string Id)
+        {
+            JsonResult result = new JsonResult();
+            result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            ProjectionService.DeleteProjection(Id);
+            result.Data = new { Success = false };
+
+            return result;
+
+        }
     }
 }

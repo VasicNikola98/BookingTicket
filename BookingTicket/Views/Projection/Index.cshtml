@@ -21,6 +21,7 @@
                     <th>ID Filma</th>
                     <th>ID Sale</th>
                     <th>Vreme prikazivanja</th>
+                    <th>Akcija</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +31,11 @@
                         <td><a href="@Url.Action("Details","Movie",new { Id = item.MovieId })">@item.MovieId</a></td>
                         <td>@item.HallId</td>
                         <td>@item.Time</td>
+                        <td>
+                            <div class="movie__btns">
+                                <a data-id="@item.ProjectionId" class="deleteProjectionBtn"><i class="fa fa-trash-o"></i></a>
+                            </div>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -42,6 +48,12 @@
     </div>
 </div>
 <script>
+
+    function focusAction(controlToFocus) {
+        $("html, body").animate({
+            scrollTop: $("#" + controlToFocus).offset().top - 100
+        }, 1000);
+    }
 
     $("#addNewProjectionBtn").click(function () {
         $.ajax({
@@ -56,9 +68,35 @@
                 alert("Fail")
                 });
     });
-    function focusAction(controlToFocus) {
-        $("html, body").animate({
-            scrollTop: $("#" + controlToFocus).offset().top - 100
-        }, 1000);
-    }
+
+    $(".deleteProjectionBtn").click(function () {
+    swal({
+        text: "Da li ste sigurni da želite da izbrišete ovu projekciju?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: 'POST',
+                    url:'@Url.Action("DeleteProjection","Projection")',
+                    data: {
+                        Id: $(this).attr('data-id'),
+                    }
+                })
+                    .done(function (response) {
+                        swal("Projekcija je uspešno izbrisana!", {
+                            icon: "success",
+                        }).then((value) => {
+                          window.location = '@Url.Action("Index","Projection")';
+                      });
+                    })
+                    .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Fail")
+                    });
+            }
+        });
+});
+
 </script>
