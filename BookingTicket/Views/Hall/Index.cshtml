@@ -4,30 +4,37 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container" style="margin-top: 56px;">
-    <a id="addNewHallBtn" class="btn btn--shine" style="float: right;">Dodaj salu</a>
+<div class="container" id="hallMainContainer" style="margin-top: 100px;">
+    <h2 class="page-heading">Bioskopske sale</h2>
+    <div style="padding:10px; margin-bottom:30px;">
+        <div style="float:right;">
+            <a id="addNewHallBtn" class="btn btn-md btn--warning btn--book btn-control--home">Dodaj salu</a>
+        </div>
+    </div>
     <table class="table table-hover text-center">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Number Of Seats</th>
-                <th>Type</th>
-                <th></th>
+                <th>Naziv sale</th>
+                <th>Broj sedišta</th>
+                <th>Tip sale</th>
+                <th>Akcija</th>
             </tr>
         </thead>
         <tbody>
-           @foreach(var hall in Model.Halls)
-           {
-               <tr>
-                   <td>@hall.Name</td>
-                   <td>@hall.NumberOfSeats</td>
-                   <td>@hall.Type</td>
-                   <td>
-                       <a data-id="@hall.HallId" class="btn btn--default hallBtnEdit">Edit</a>
-                       <a data-id="@hall.HallId" class="btn btn--danger hallBtnDelete">X</a>
-                   </td>
-               </tr>
-           }
+            @foreach (var hall in Model.Halls)
+            {
+                <tr>
+                    <td>@hall.Name</td>
+                    <td>@hall.NumberOfSeats</td>
+                    <td>@hall.Type</td>
+                    <td>
+                        <div class="movie__btns">
+                            <a data-id="@hall.HallId" class="hallBtnEdit"><i class="fa fa-pencil"></i></a>
+                            <a data-id="@hall.HallId" class="hallBtnDelete"><i class="fa fa-trash-o"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

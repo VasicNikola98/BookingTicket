@@ -1,60 +1,121 @@
-﻿<div class="container row">
+﻿
+<div class="container row">
     <h2 class="page-heading">Novi film</h2>
     <form id="addMovieForm" class="col-md-8">
-         <div class="form-group"  style="margin: 5px;">
-             <input class="form-control" id="Title" name="Title" placeholder="Title" required />
-         </div>
-         <div class="form-group"  style="margin: 5px;">
-             <input class="form-control" id="Starring" name="Starring" placeholder="Starring" required />
-         </div>
-         
-         
-         <div class="form-group"  style="margin: 5px;">
-             <input class="form-control" id="Genre" name="Genre" placeholder="Genre" required />
-         </div>
-         <div class="form-group"  style="margin: 5px;">
-             <input type="number" class="form-control" id="RunTime" name="RunTime" placeholder="RunTime" required />
-         </div>
-       
-        <div class="form-group"  style="margin: 5px;">
+        <div class="form-group" style="margin: 5px;">
+            <label for="Title">Titl <span style="color:red;">*</span></label>
+            <br />
+            <input class="form-control" id="Title" name="Title" placeholder="Titl" required />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <label for="Starring">Glumci <span style="color:red;">*</span></label>
+            <br />
+            <input class="form-control" id="Starring" name="Starring" placeholder="U glavnoj ulozi" required />
+        </div>
+
+
+        <div class="form-group" style="margin: 5px;">
+            <label for="Genre">Žanr <span style="color:red;">*</span></label>
+            <br />
+            <input class="form-control" id="Genre" name="Genre" placeholder="Žanr" required />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <label for="RunTime">Vreme trajanja <span style="color:red;">*</span></label>
+            <br />
+            <input type="number" class="form-control" id="RunTime" name="RunTime" placeholder="Vreme trajanja" required />
+        </div>
+
+        <div class="form-group" style="margin: 5px;">
+            <label for="Description">Deskripcija</label>
+            <br />
             <textarea rows="4" class="form-control" id="Description" name="Description" placeholder="Opis filma..."></textarea>
         </div>
-    
-        <div class="form-group "  style="margin: 5px;">
-            <input class="form-control" id="ReleaseDate" name="ReleaseDate" placeholder="ReleaseDate" required />
+
+        <div class="form-group " style="margin: 5px;">
+            <label for="ReleaseDate">Datum izlaska</label>
+            <br />
+            <input class="form-control" id="ReleaseDate" name="ReleaseDate" placeholder="Datum izlaska"/>
         </div>
         <div class="form-group" style="margin: 5px;">
             <input type="hidden" name="ImageUrl" id="ImageUrl" />
+            <label>Poster</label>
+            <br />
             <input type="file" accept=".jpg, .png" class="form-control" id="imageUpload" name="Image" autocomplete="off" />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <a id="addNewMovieBtn" class="btn btn--default">Sačuvaj</a>
+            <a id="cancleMovieBtn" class="btn btn--danger">Nazad</a>
         </div>
     </form>
     <div class="col-md-4">
-        <img id="movieImage" src="~/Content/images/logo-dark.png"/>
-    </div>
-    <div class="form-group"  style="margin: 12px;">
-        <a id="addNewMovieBtn" class="btn btn--default">Sačuvaj</a>
+        <img id="movieImage" style="height:350px; width:250px;" src="~/Content/images/banners/noImage.jpg" />
     </div>
 </div>
 <script>
-    $("#addNewMovieBtn").click(function () {
+    $('#addMovieForm').validate({
+        rules: {
+            Title: {
+                required: true
+            },
+            Starring: {
+                required: true
+            },
+            Genre: {
+                required: true
+            },
+            RunTime: {
+                required: true
+            }
+        },
+        messages: {
+            Title: {
+                required: 'Ovo polje je obavezno!'
+            },
+            Starring: {
+                required: 'Ovo polje je obavezno!'
+            },
+            Genre: {
+                required: 'Ovo polje je obavezno!'
+            },
+            RunTime: {
+                required: 'Ovo polje je obavezno!'
+            }
+        }
+    });
 
+    $("#addNewMovieBtn").click(function () {
+        if ($("#addMovieForm").valid()) {
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("AddMovie", "Movie")',
                 data: $("#addMovieForm").serialize()
             })
-            .done(function (response) {
-                $("#movieActionContainer").html("");
-                     swal("Gotovo", "Film je uspešno dodat.", "success").then((value) => {
+                .done(function (response) {
+                    $("#movieActionContainer").html("");
+                    swal("Gotovo", "Film je uspešno dodat.", "success").then((value) => {
                         window.location = '@Url.Action("Index","Movie")';
                     });
-            })
-            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("FAIL");
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("FAIL");
+                });
+        }
+        else {
+            swal({
+                title: "Upozorenje!",
+                text: "Popunite sva polja koja su označena zvezdicom!",
+                icon: "warning",
+                dangerMode: true,
             });
+        }
     });
 
-     $("#imageUpload").change(function () {
+    $("#cancleMovieBtn").click(function () {
+        $("#movieActionContainer").html("");
+        focusAction("movieMainContainer");
+    });
+
+    $("#imageUpload").change(function () {
 
         debugger;
     var element = this;

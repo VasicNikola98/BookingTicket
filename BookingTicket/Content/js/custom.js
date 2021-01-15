@@ -199,11 +199,13 @@ function init_Elements () {
     //7. Dropdown for authorize button
     		//user list option
             $('.auth__show').click(function (e){
+
                 e.preventDefault();
                 $('.auth__function').toggleClass('open-function')
             })
 
             $('.btn--singin').click(function (e){
+
                 e.preventDefault();
                 $('.auth__function').toggleClass('open-function')
             });
@@ -277,15 +279,13 @@ function init_Home() {
 	
 	//2. Dropdown for authorize button
     		//user list option
-            $('.auth__show').click(function (e){
+            $('.auth__show').click(function (e) {
+                
                 e.preventDefault();
                 $('.auth__function').toggleClass('open-function')
             })
 
-            $('.btn--singin').click(function (e){
-                e.preventDefault();
-                $('.auth__function').toggleClass('open-function')
-            });
+        
 
     //3. Mega select with filters (and markers)
     //Mega select interaction

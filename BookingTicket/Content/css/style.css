@@ -2595,7 +2595,7 @@ input[type="button"].btn-block {
   z-index: 120;
 }
 .header-wrapper--home {
-  background: rgba(46, 41, 46, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   position: absolute;
   height: 55px;
   width: 100%;
@@ -4517,6 +4517,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   min-width: 104px;
   position: relative;
   z-index: 3;
+  margin-right:20px;
 }
 .auth .auth__image img {
   width: 31px;
@@ -6048,11 +6049,11 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 .contact-info .contact-info__field-tel:after {
   content: "\f095";
 }
-.contact-info .contact-info__field-ticket:after {
-    content: "\f3ff";
-}
+    .contact-info .contact-info__field-ticket:after {
+        content: "\f145";
+    }
 
-.error {
+/*.error {
   margin-top: 240px;
   margin-bottom: 140px;
   background-color: #4c4145;
@@ -6060,8 +6061,12 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   padding-bottom: 100px;
   position: relative;
   z-index: 2;
+}*/
+
+.error {
+    color: red;
 }
-.error .error__image {
+/*.error .error__image {
   height: 99px;
   width: 207px;
 }
@@ -6072,7 +6077,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   font-family: 'aleobold', sans-serif;
   margin-top: -3px;
   margin-bottom: 46px;
-}
+}*/
 .couter {
   overflow: hidden;
   text-align: center;
@@ -9976,4 +9981,42 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   .post--preview .post__image {
     width: 100%;
   }
+}
+
+.movie_btn {
+    font-size:20px;
+}
+
+.editMovieBtn {
+    font-size: 30px;
+    margin-right: 15px;
+    cursor: pointer;
+    color: #036bfc;
+}
+.editMovieBtn:hover {
+    color: #70acff;
+}
+
+.deleteMovieBtn {
+    font-size: 30px;
+    cursor:pointer;
+    color:red;
+
+}
+
+.hallBtnEdit {
+    font-size: 30px;
+    margin-right: 15px;
+    cursor: pointer;
+    color: #036bfc;
+}
+
+.hallBtnEdit:hover {
+    color: #70acff;
+}
+
+.hallBtnDelete {
+    font-size: 30px;
+    cursor: pointer;
+    color: red;
 }

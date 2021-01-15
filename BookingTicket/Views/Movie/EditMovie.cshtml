@@ -1,62 +1,122 @@
 ﻿@model BookingTicket.ViewModels.MovieViewModel
-
+@{ 
+    var imageUrl = !string.IsNullOrEmpty(Model.Movie.ImageUrl) ? Model.Movie.ImageUrl : "~/Content/images/banners/noImage.jpg";
+}
 <div class="container row">
     <h2 class="page-heading">Izmeni film</h2>
     <form class="col-md-8" id="editMovieForm">
         <div class="form-group" style="margin: 5px;">
-            <input class="form-control" id="Title" name="Title" placeholder="Title" value="@Model.Movie.Title" required />
+            <label for="Title">Titl <span style="color:red;">*</span></label>
+            <br />
+            <input class="form-control" id="Title" name="Title" placeholder="Titl" value="@Model.Movie.Title" required />
         </div>
         <div class="form-group" style="margin: 5px;">
-            <input class="form-control" id="Starring" name="Starring" placeholder="Starring" value="@Model.Movie.Starring" required />
-        </div>
-
-        <div class="form-group" style="margin: 5px;">
-            <input class="form-control" id="Genre" name="Genre" placeholder="Genre" value="@Model.Movie.Genre" required />
-        </div>
-        <div class="form-group" style="margin: 5px;">
-            <input type="number" class="form-control" id="RunTime" name="RunTime" placeholder="RunTime" value="@Model.Movie.RunTime" required />
+            <label for="Starring">Glumci <span style="color:red;">*</span></label>
+            <br />
+            <input class="form-control" id="Starring" name="Starring" placeholder="U glavnoj ulozi" value="@Model.Movie.Starring" required />
         </div>
 
         <div class="form-group" style="margin: 5px;">
+            <label for="Genre">Žanr <span style="color:red;">*</span></label>
+            <br />
+            <input class="form-control" id="Genre" name="Genre" placeholder="Žanr" value="@Model.Movie.Genre" required />
+        </div>
+        <div class="form-group" style="margin: 5px;">
+            <label for="RunTime">Vreme trajanja <span style="color:red;">*</span></label>
+            <br />
+            <input type="number" class="form-control" id="RunTime" name="RunTime" placeholder="Vreme trajanja" value="@Model.Movie.RunTime" required />
+        </div>
+
+        <div class="form-group" style="margin: 5px;">
+            <label for="Description">Deskripcija</label>
+            <br />
             <input class="form-control" id="Description" name="Description" placeholder="Opis filma..." value="@Model.Movie.Description" />
         </div>
 
         <div class="form-group " style="margin: 5px;">
-            <input class="form-control" id="ReleaseDate" name="ReleaseDate" placeholder="ReleaseDate" value="@Model.Movie.ReleaseDate" required />
-        </div> 
+            <label for="ReleaseDate">Datum izlaska</label>
+            <br />
+            <input class="form-control" id="ReleaseDate" name="ReleaseDate" placeholder="Datum izlaska" value="@Model.Movie.ReleaseDate" />
+        </div>
         <div class="form-group" style="margin: 5px;">
-            <input type="hidden" id="ImageUrl" name="ImageUrl" value="@Model.Movie.ImageUrl"/>
+            <input type="hidden" id="ImageUrl" name="ImageUrl" value="@Model.Movie.ImageUrl" />
             <input type="file" accept=".jpg, .png" class="form-control" id="imageUpload" name="Image" autocomplete="off" />
-        </div>-
+        </div>
         <input type="hidden" value="@Model.Movie.MovieId" id="MovieId" name="MovieId" />
+        <div class="form-group" style="margin: 5px;">
+            <a id="editMovieBtn" class="btn btn--default">Sačuvaj izmene</a>
+            <a id="cancleEditMovieBtn" class="btn btn--danger">Nazad</a>
+        </div>
     </form>
     <div class="col-md-4">
-        <img id="movieImage" src="@Model.Movie.ImageUrl" />
-    </div>
-    <div class="form-group" style="margin: 12px;">
-        <a id="editMovieBtn" class="btn btn--default">Sačuvaj izmene</a>
+        <img id="movieImage" style="height:350px; width:250px;" src="@imageUrl" />
     </div>
 </div>
 
 <script>
+    $('#editMovieForm').validate({
+        rules: {
+            Title: {
+                required: true
+            },
+            Starring: {
+                required: true
+            },
+            Genre: {
+                required: true
+            },
+            RunTime: {
+                required: true
+            }
+        },
+        messages: {
+            Title: {
+                required: 'Ovo polje je obavezno!'
+            },
+            Starring: {
+                required: 'Ovo polje je obavezno!'
+            },
+            Genre: {
+                required: 'Ovo polje je obavezno!'
+            },
+            RunTime: {
+                required: 'Ovo polje je obavezno!'
+            }
+        }
+    });
+
     $("#editMovieBtn").click(function () {
+        if ($("#editMovieForm").valid()) {
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("EditMovie", "Movie")',
                 data: $("#editMovieForm").serialize()
             })
-            .done(function (response) {
-                $("#movieActionContainer").html("");
-                     swal("Gotovo", "Film je uspešno izmenjen.", "success").then((value) => {
+                .done(function (response) {
+                    $("#movieActionContainer").html("");
+                    swal("Gotovo", "Film je uspešno izmenjen.", "success").then((value) => {
                         window.location = '@Url.Action("Index","Movie")';
                     });
-            })
-            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("FAIL");
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("FAIL");
+                });
+        } else {
+            swal({
+                title: "Upozorenje!",
+                text: "Popunite sva polja koja su označena zvezdicom!",
+                icon: "warning",
+                dangerMode: true,
             });
+        }
     });
 
-     $("#imageUpload").change(function () {
+    $("#cancleEditMovieBtn").click(function () {
+        $("#movieActionContainer").html("");
+        focusAction("movieMainContainer");
+    });
+
+    $("#imageUpload").change(function () {
 
         
     var element = this;

@@ -6,7 +6,10 @@
 
 <form id="addProject" style="margin-top: 56px;">
     <div class="container">
-        <div class="form-group">
+        <h2 class="page-heading">Nova projekcija</h2>
+        <div class="form-group" style="margin:5px;">
+            <label>Izaberi film</label>
+            <br />
             <select id="selectMovie" name="MovieId" class="form-control">
                 @foreach (var movie in Model.Movies)
                 {
@@ -14,7 +17,9 @@
                 }
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="margin:5px;">
+            <label>Izaberi salu</label>
+            <br />
             <select id="selectHall" name="HallId" class="form-control">
                 @foreach (var hall in Model.Halls)
                 {
@@ -22,7 +27,9 @@
                 }
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="margin:5px;">
+            <label>Izaberi vreme</label>
+            <br />
             <select id="selectTime" name="Time" class="form-control">
                 @foreach (var time in times)
                 {
@@ -30,11 +37,15 @@
                 }
             </select>
         </div>
-        <a id="addProjectionBtn" class="btn btn-danger">Dodaj projekciju</a>
+        <div class="form-group" style="margin: 5px;">
+            <a id="addProjectionBtn" class="btn btn--default">Sačuvaj</a>
+            <a id="cancleProjectionBtn" class="btn btn--danger">Nazad</a>
+        </div>
     </div>
 </form>
 
 <script>
+
     $("#addProjectionBtn").click(function () {
           $.ajax({
                 type: 'POST',
@@ -50,5 +61,10 @@
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("FAIL");
             });
+    });
+
+    $("#cancleProjectionBtn").click(function () {
+        $("#projectionActionContainer").html("");
+        focusAction("projectionMainContainer");
     });
 </script>

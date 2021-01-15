@@ -2,35 +2,85 @@
     <h2 class="page-heading">Nova sala</h2>
     <form id="addHallForm" class="col-md-8">
         <div class="form-group" style="margin: 5px;">
-            <input class="form-control" id="Name" name="Name" placeholder="Name" required />
+            <label for="Name">Naziv sale <span style="color:red;">*</span></label>
+            <br />
+            <input class="form-control" id="Name" name="Name" placeholder="Naziv sale" required  autocomplete="off"/>
         </div>
         <div class="form-group" style="margin: 5px;">
-            <input class="form-control" id="NumberOfSeats" name="NumberOfSeats" placeholder="Number Of Seats" required />
+            <label for="NumberOfSeats">Broj sedišta<span style="color:red;">*</span></label>
+            <br />
+            <input class="form-control" id="NumberOfSeats" name="NumberOfSeats" placeholder="Broj sedišta" required autocomplete="off"/>
         </div>
         <div class="form-group" style="margin: 5px;">
-            <input class="form-control" id="Type" name="Type" placeholder="Type" required />
+            <label for="Type">Tip sale<span style="color:red;">*</span></label>
+            <br />
+            <input class="form-control" id="Type" name="Type" placeholder="Tip sale" required autocomplete="off"/>
         </div>
     </form>
     <div class="form-group" style="margin: 12px;">
         <a id="newHallBtn" class="btn btn--default">Sačuvaj</a>
+        <a id="cancleHallBtn" class="btn btn--danger">Nazad</a>
     </div>
+
 </div>
 
 <script>
-   $("#newHallBtn").click(function () {
+
+    $('#addHallForm').validate({
+        rules: {
+            Name: {
+                required: true
+            },
+            NumberOfSeats: {
+                required: true
+            },
+            Type: {
+                required: true
+            }
+        },
+        messages: {
+            Name: {
+                required: 'Ovo polje je obavezno!'
+            },
+            NumberOfSeats: {
+                required: 'Ovo polje je obavezno!'
+            },
+            Type: {
+                required: 'Ovo polje je obavezno!'
+            }
+        }
+    });
+
+    $("#newHallBtn").click(function () {
+        if ($("#addHallForm").valid()) {
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("AddHall", "Hall")',
                 data: $("#addHallForm").serialize()
             })
-            .done(function (response) {
-                     $("#hallActionContainer").html("");
-                     swal("Gotovo", "Sala je uspešno dodata.", "success").then((value) => {
+                .done(function (response) {
+                    $("#hallActionContainer").html("");
+                    swal("Gotovo", "Sala je uspešno dodata.", "success").then((value) => {
                         window.location = '@Url.Action("Index","Hall")';
-                     });
-            })
-            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("FAIL");
+                    });
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("FAIL");
+                });
+        }
+        else {
+            swal({
+                title: "Upozorenje!",
+                text: "Popunite sva polja koja su označena zvezdicom!",
+                icon: "warning",
+                dangerMode: true,
             });
+        }
+   });
+
+    $("#cancleHallBtn").click(function () {
+        $("#hallActionContainer").html("");
+        focusAction("hallMainContainer");
     });
+
 </script>
