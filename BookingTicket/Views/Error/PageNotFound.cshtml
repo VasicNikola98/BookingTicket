@@ -5,20 +5,20 @@
 
 <div class="wrapper">
     <div class="error-wrapper">
-        <a href='index.html' class="logo logo--dark">
+        <a href='@Url.Action("Index","Home")' class="logo logo--dark">
             <img alt='logo' src="~/Content/images/logo-dark.png">
-            <p class="slogan--dark">fun to search, fun to watch</p>
+            <p></p>
         </a>
 
-        <div class="error">
+        <div class="error-page">
             <img alt='' src='~/Content/images/error.png' class="error__image">
-            <h1 class="error__text">sorry, but page can’t be found</h1>
-            <a href="@Url.Action("Index","Home")" class="btn btn-md btn--warning">return to homepage</a>
+            <h1 class="error__text">Žao nam je, ovu stranicu ne možemo pronaći</h1>
+            <a href="@Url.Action("Index","Home")" class="btn btn-md btn--warning">vrati se na početnu stranu</a>
         </div>
     </div>
 
     <div class="copy-bottom">
-        <p class="copy">&copy; A.Movie, 2013. All rights reserved. Done by Olia Gozha</p>
+        <p class="copy">&copy; A.Movie, 2021. Sva prava zadržana.</p>
     </div>
 </div>
 
